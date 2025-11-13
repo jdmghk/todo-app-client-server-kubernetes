@@ -1,4 +1,4 @@
-FROM node:alpine as todo-app-build
+FROM node:18-alpine as todo-app-build
 
 WORKDIR /client
 
@@ -10,6 +10,8 @@ COPY ./public ./public
 
 COPY ./src ./src
 
+# ✅ Fix for "error:0308010C:digital envelope routines::unsupported"
+ENV NODE_OPTIONS=--openssl-legacy-provider
 ENV REACT_APP_baseAPIURL=<backend-app-service-ip>:<port>
 
 RUN yarn build

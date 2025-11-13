@@ -6,18 +6,18 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-      app: todo-server-app
+      app: todo-server
   template:
     metadata:
       labels:
-        app: todo-server-app
+        app: todo-server
     spec:
       containers:
-      - image: todo-server-kubernetes-app:latest
-        name: container1
+      - image: todo-server:1.0
+        name: todo-server
         ports:
         - containerPort: 5000
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Never
         envFrom:
         - configMapRef:
             name: server-side-configs

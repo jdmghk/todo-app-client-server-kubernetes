@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb-deployment
+  labels:
+    app: todo-mongodb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-mongodb
+  template:
+    metadata:
+      labels:
+        app: todo-mongodb
+    spec:
+      volumes:
+      - name: todo-mongo-vol
+        persistentVolumeClaim:
+          claimName: todo-pvc
+      containers:
+      - name: mongodb
+        image: mongo
+        command:
+        - mongod
+        - "--bind_ip"
+        - "0.0.0.0"
+        ports:
+        - containerPort: 27017
+        volumeMounts:
+        - name: todo-mongo-vol
+          mountPath: /data/db

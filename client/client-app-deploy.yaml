@@ -13,6 +13,6 @@ spec:
         app: todo-client-app
     spec:
       containers:
-      - image: todo-client-kubernetes-app:latest
+      - image: todo-client:1.0
         name: container1
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Never
